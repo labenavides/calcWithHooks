@@ -2,13 +2,13 @@ import React, { useState } from "react";
 
 function OperationProvider() {
   const [number, setNumber] = useState(123);
-  const [prevValue, setPrevValue] = useState();
+  const [prevValue, setPrevValue] = useState(0);
   const [operation, setOperation] = useState("");
 
   const clearAll = () => {
-    setNumber("");
+    setNumber(0);
     setOperation("");
-    setPrevValue("");
+    setPrevValue(0);
   };
 
   const setOperationType = (type) => {
@@ -23,51 +23,28 @@ function OperationProvider() {
         console.log("operation " + operation);
         console.log("valor previo" + prevValue);
         console.log("numero ingresado" + number);
-        setPrevValue(
-          `${
-            Math.round(
-              `${(parseFloat(prevValue) + parseFloat(number)) * 100}`
-            ) / 100
-          }`
-        );
+        setPrevValue(parseInt(prevValue) + parseInt(number));
         setNumber("");
         break;
       case "-":
         console.log("operation " + operation);
         console.log("valor previo" + prevValue);
         console.log("numero ingresado" + number);
-        setPrevValue(
-          `${
-            Math.round(
-              `${(parseFloat(prevValue) - parseFloat(number)) * 100}`
-            ) / 100
-          }`
-        );
+        setPrevValue(parseInt(prevValue) - parseInt(number));
         setNumber("");
         break;
       case "*":
         console.log("operation " + operation);
         console.log("valor previo" + prevValue);
         console.log("numero ingresado" + number);
-        setPrevValue(
-          `${
-            Math.round(`${parseFloat(prevValue) * parseFloat(number) * 100}`) /
-            100
-          }`
-        );
+        setPrevValue(prevValue * parseInt(number));
         setNumber("");
         break;
       case "/":
         console.log("operation " + operation);
         console.log("valor previo" + prevValue);
         console.log("numero ingresado" + number);
-        setPrevValue(
-          `${
-            Math.round(
-              `${(parseFloat(prevValue) / parseFloat(number)) * 100}`
-            ) / 100
-          }`
-        );
+        setPrevValue(prevValue / parseInt(number));
         setNumber("");
         break;
       default:
