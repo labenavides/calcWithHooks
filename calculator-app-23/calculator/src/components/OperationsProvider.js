@@ -52,9 +52,6 @@ function OperationProvider() {
         <p>number</p> {parseInt(number) + ""}
       </div>
       <div>
-        <p>operation</p> {operation}
-      </div>
-      <div>
         {/* clear all */}
         <button onClick={() => clearAll()} value="">
           AC
