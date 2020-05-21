@@ -16,6 +16,7 @@ function OperationProvider() {
   };
 
   const setOperationType = (type) => {
+    console.log("algo");
     setOperation(type);
     getCalc(type);
   };
@@ -23,20 +24,32 @@ function OperationProvider() {
     console.log("operacion " + operation);
     switch (operation) {
       case "+":
+        console.log("operation " + operation);
+        console.log("valor previo" + prevValue);
+        console.log("numero ingresado" + number);
         setPrevValue(parseInt(prevValue) + parseInt(number));
         setNumber(0);
         break;
       case "-":
+        console.log("operation " + operation);
+        console.log("valor previo" + prevValue);
+        console.log("numero ingresado" + number);
         setPrevValue(parseInt(prevValue) - parseInt(number));
         setNumber(0);
         break;
       case "*":
-        setPrevValue(parseInt(prevValue) * parseInt(number));
-        setNumber(0);
+        console.log("operation " + operation);
+        console.log("valor previo" + prevValue);
+        console.log("numero ingresado" + number);
+        setPrevValue(prevValue * parseInt(number));
+        setNumber("");
         break;
       case "/":
-        setPrevValue(parseInt(prevValue) / parseInt(number));
-        setNumber(0);
+        console.log("operation " + operation);
+        console.log("valor previo" + prevValue);
+        console.log("numero ingresado" + number);
+        setPrevValue(prevValue / parseInt(number));
+        setNumber("");
         break;
       default:
         break;
@@ -69,7 +82,7 @@ function OperationProvider() {
         {/* "=" btn */}
         <button
           onClick={(e) => {
-            getCalc(operation);
+            getCalc();
           }}
           value="="
         >
