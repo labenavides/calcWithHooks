@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 
-function OperationProvider(props) {
+function Calculator(props) {
   const { initialValue } = props;
   const [number, setNumber] = useState(parseInt(initialValue));
   const [prevValue, setPrevValue] = useState(0);
@@ -163,4 +163,4 @@ function OperationProvider(props) {
   );
 }
 
-export default OperationProvider;
+export default Calculator;
