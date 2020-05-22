@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 function Calculator(props) {
   const { initialValue } = props;
   const [number, setNumber] = useState(parseInt(initialValue));
-  const [prevValue, setPrevValue] = useState(0);
+  const [prevValue, setPrevValue] = useState();
   const [operation, setOperation] = useState("");
 
   const clearAll = () => {
@@ -18,27 +18,30 @@ function Calculator(props) {
   };
 
   const setOperationType = (type) => {
+    if (!prevValue) {
+      setPrevValue(number);
+    }
     setOperation(type);
-    getCalc(type);
+    //  getCalc(type);
   };
   const getCalc = (operation) => {
     console.log("operacion " + operation);
     switch (operation) {
       case "+":
         setPrevValue(parseInt(prevValue) + parseInt(number));
-        setNumber(0);
+        setNumber();
         break;
       case "-":
         setPrevValue(parseInt(prevValue) - parseInt(number));
-        setNumber(0);
+        setNumber();
         break;
       case "*":
         setPrevValue(parseInt(prevValue) * parseInt(number));
-        setNumber(0);
+        setNumber();
         break;
       case "/":
         setPrevValue(parseInt(prevValue) / parseInt(number));
-        setNumber(0);
+        setNumber();
         break;
       default:
         break;
@@ -48,23 +51,9 @@ function Calculator(props) {
   return (
     <div>
       <div>{prevValue}</div>
+      <div>{operation}</div>
       <div>{parseInt(number) + ""}</div>
 
-      <div>
-        {/* operations button */}
-        <Button variant="primary" onClick={() => setOperationType("+")}>
-          +
-        </Button>
-        <Button variant="primary" onClick={() => setOperationType("-")}>
-          -
-        </Button>
-        <Button variant="primary" onClick={() => setOperationType("/")}>
-          /
-        </Button>
-        <Button variant="primary" onClick={() => setOperationType("*")}>
-          *
-        </Button>
-      </div>
       <div>
         <Button
           variant="ligth"
@@ -89,6 +78,10 @@ function Calculator(props) {
           {" "}
           9
         </Button>
+        {/* operations button */}
+        <Button bsStyle="primary" onClick={() => setOperationType("+")}>
+          +
+        </Button>{" "}
       </div>
       <div>
         <Button
@@ -112,6 +105,9 @@ function Calculator(props) {
         >
           6
         </Button>
+        <Button variant="primary" onClick={() => setOperationType("-")}>
+          -
+        </Button>{" "}
       </div>
       <div>
         <Button
@@ -135,6 +131,9 @@ function Calculator(props) {
         >
           3
         </Button>
+        <Button variant="primary" onClick={() => setOperationType("/")}>
+          /
+        </Button>{" "}
       </div>
       <div>
         <Button
@@ -158,6 +157,9 @@ function Calculator(props) {
         >
           =
         </Button>
+        <Button variant="primary" onClick={() => setOperationType("*")}>
+          *
+        </Button>{" "}
       </div>
     </div>
   );
