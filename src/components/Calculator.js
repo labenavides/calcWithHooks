@@ -3,8 +3,8 @@ import Button from "react-bootstrap/Button";
 
 function Calculator(props) {
   const { initialValue } = props;
-  const [number, setNumber] = useState(0);
-  const [prevValue, setPrevValue] = useState(parseInt(initialValue));
+  const [number, setNumber] = useState(parseInt(initialValue));
+  const [prevValue, setPrevValue] = useState();
   const [operation, setOperation] = useState("");
 
   const clearAll = () => {
@@ -50,14 +50,18 @@ function Calculator(props) {
   };
 
   return (
-    <div>
-      <div>{prevValue}</div>
-      <div>{operation}</div>
-      <div>{parseInt(number) + ""}</div>
-
+    <div id="calculator-div">
+      <div className="display-result">
+        {prevValue}
+        {""}
+        {operation}
+        {""}
+        {parseInt(number) + ""}
+      </div>
       <div>
         <Button
           variant="ligth"
+          className="button"
           onClick={(e) => setNumberFromButton(e.target.value)}
           value="7"
         >
@@ -65,6 +69,7 @@ function Calculator(props) {
         </Button>
         <Button
           variant="ligth"
+          className="button"
           onClick={(e) => setNumberFromButton(e.target.value)}
           value="8"
         >
@@ -73,6 +78,7 @@ function Calculator(props) {
         </Button>
         <Button
           variant="ligth"
+          className="button"
           onClick={(e) => setNumberFromButton(e.target.value)}
           value="9"
         >
@@ -80,13 +86,18 @@ function Calculator(props) {
           9
         </Button>
         {/* operations button */}
-        <Button bsStyle="primary" onClick={() => setOperationType("+")}>
+        <Button
+          className="button"
+          bsStyle="primary"
+          onClick={() => setOperationType("+")}
+        >
           +
         </Button>{" "}
       </div>
       <div>
         <Button
           variant="ligth"
+          className="button"
           onClick={(e) => setNumberFromButton(e.target.value)}
           value="4"
         >
@@ -94,6 +105,7 @@ function Calculator(props) {
         </Button>
         <Button
           variant="ligth"
+          className="button"
           onClick={(e) => setNumberFromButton(e.target.value)}
           value="5"
         >
@@ -101,18 +113,24 @@ function Calculator(props) {
         </Button>
         <Button
           variant="ligth"
+          className="button"
           onClick={(e) => setNumberFromButton(e.target.value)}
           value="6"
         >
           6
         </Button>
-        <Button variant="primary" onClick={() => setOperationType("-")}>
+        <Button
+          variant="primary"
+          className="button"
+          onClick={() => setOperationType("-")}
+        >
           -
         </Button>{" "}
       </div>
       <div>
         <Button
           variant="ligth"
+          className="button"
           onClick={(e) => setNumberFromButton(e.target.value)}
           value="1"
         >
@@ -120,6 +138,7 @@ function Calculator(props) {
         </Button>
         <Button
           variant="ligth"
+          className="button"
           onClick={(e) => setNumberFromButton(e.target.value)}
           value="2"
         >
@@ -127,30 +146,42 @@ function Calculator(props) {
         </Button>
         <Button
           variant="ligth"
+          className="button"
           onClick={(e) => setNumberFromButton(e.target.value)}
           value="3"
         >
           3
         </Button>
-        <Button variant="primary" onClick={() => setOperationType("/")}>
+        <Button
+          variant="primary"
+          className="button"
+          onClick={() => setOperationType("/")}
+        >
           /
         </Button>{" "}
       </div>
       <div>
         <Button
           variant="ligth"
+          className="button"
           onClick={(e) => setNumberFromButton(e.target.value)}
           value="0"
         >
           0
         </Button>
         {/* clear all */}
-        <Button variant="ligth" onClick={() => clearAll()} value="">
+        <Button
+          variant="ligth"
+          className="button"
+          onClick={() => clearAll()}
+          value=""
+        >
           AC
         </Button>
         {/* "=" btn */}
         <Button
           variant="danger"
+          className="button"
           onClick={(e) => {
             getCalc(operation);
           }}
@@ -158,7 +189,11 @@ function Calculator(props) {
         >
           =
         </Button>
-        <Button variant="primary" onClick={() => setOperationType("*")}>
+        <Button
+          variant="primary"
+          className="button"
+          onClick={() => setOperationType("*")}
+        >
           *
         </Button>{" "}
       </div>
