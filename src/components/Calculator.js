@@ -13,7 +13,7 @@ function Calculator(props) {
     setPrevValue();
   };
   const setAfterOperation = () => {
-    setNumber(0);
+    setNumber("");
     setOperation("");
   };
   const setNumberFromButton = (e) => {
@@ -27,15 +27,16 @@ function Calculator(props) {
 
   const setOperationType = (type) => {
     if (!prevValue) {
-      setPrevValue(parseInt(number) + "");
-      setNumber(0);
+      setPrevValue(number);
+      setNumber("");
     }
-
     setOperation(type);
-    //  getCalc(type);
   };
   const getCalc = (operation) => {
     console.log("operacion " + operation);
+    if (number === "") {
+      setNumber("0");
+    }
     switch (operation) {
       case "+":
         setPrevValue(parseInt(prevValue) + parseInt(number));
@@ -61,13 +62,8 @@ function Calculator(props) {
   return (
     <div id="calculator-div">
       <div className="display-result">
-        {prevValue}
         {""}
-        {operation}
-      </div>
-      <div className="display-result">
-        {""}
-        {parseInt(number) + ""}
+        {number !== "" ? number : "" === operation ? prevValue : number}
       </div>
       <div>
         <Button
