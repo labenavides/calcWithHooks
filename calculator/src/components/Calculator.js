@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
 
-function OperationProvider() {
-  const [number, setNumber] = useState(123);
+function OperationProvider(props) {
+  const { initialValue } = props;
+  const [number, setNumber] = useState(parseInt(initialValue));
   const [prevValue, setPrevValue] = useState(0);
   const [operation, setOperation] = useState("");
 
@@ -16,7 +18,6 @@ function OperationProvider() {
   };
 
   const setOperationType = (type) => {
-    console.log("algo");
     setOperation(type);
     getCalc(type);
   };
@@ -24,32 +25,20 @@ function OperationProvider() {
     console.log("operacion " + operation);
     switch (operation) {
       case "+":
-        console.log("operation " + operation);
-        console.log("valor previo" + prevValue);
-        console.log("numero ingresado" + number);
         setPrevValue(parseInt(prevValue) + parseInt(number));
         setNumber(0);
         break;
       case "-":
-        console.log("operation " + operation);
-        console.log("valor previo" + prevValue);
-        console.log("numero ingresado" + number);
         setPrevValue(parseInt(prevValue) - parseInt(number));
         setNumber(0);
         break;
       case "*":
-        console.log("operation " + operation);
-        console.log("valor previo" + prevValue);
-        console.log("numero ingresado" + number);
-        setPrevValue(prevValue * parseInt(number));
-        setNumber("");
+        setPrevValue(parseInt(prevValue) * parseInt(number));
+        setNumber(0);
         break;
       case "/":
-        console.log("operation " + operation);
-        console.log("valor previo" + prevValue);
-        console.log("numero ingresado" + number);
-        setPrevValue(prevValue / parseInt(number));
-        setNumber("");
+        setPrevValue(parseInt(prevValue) / parseInt(number));
+        setNumber(0);
         break;
       default:
         break;
@@ -58,71 +47,117 @@ function OperationProvider() {
 
   return (
     <div>
-      <div>
-        <p>Prev value</p> {prevValue}
-      </div>
-      <div>
-        <p>number</p> {parseInt(number) + ""}
-      </div>
-      <div>
-        <p>operation</p> {operation}
-      </div>
-      <div>
-        {/* clear all */}
-        <button onClick={() => clearAll()} value="">
-          AC
-        </button>
-      </div>
+      <div>{prevValue}</div>
+      <div>{parseInt(number) + ""}</div>
+
       <div>
         {/* operations button */}
-        <button onClick={() => setOperationType("+")}>+</button>
-        <button onClick={() => setOperationType("-")}>-</button>
-        <button onClick={() => setOperationType("/")}>/</button>
-        <button onClick={() => setOperationType("*")}>*</button>
+        <Button variant="primary" onClick={() => setOperationType("+")}>
+          +
+        </Button>
+        <Button variant="primary" onClick={() => setOperationType("-")}>
+          -
+        </Button>
+        <Button variant="primary" onClick={() => setOperationType("/")}>
+          /
+        </Button>
+        <Button variant="primary" onClick={() => setOperationType("*")}>
+          *
+        </Button>
+      </div>
+      <div>
+        <Button
+          variant="ligth"
+          onClick={(e) => setNumberFromButton(e.target.value)}
+          value="7"
+        >
+          7
+        </Button>
+        <Button
+          variant="ligth"
+          onClick={(e) => setNumberFromButton(e.target.value)}
+          value="8"
+        >
+          {" "}
+          8
+        </Button>
+        <Button
+          variant="ligth"
+          onClick={(e) => setNumberFromButton(e.target.value)}
+          value="9"
+        >
+          {" "}
+          9
+        </Button>
+      </div>
+      <div>
+        <Button
+          variant="ligth"
+          onClick={(e) => setNumberFromButton(e.target.value)}
+          value="4"
+        >
+          4
+        </Button>
+        <Button
+          variant="ligth"
+          onClick={(e) => setNumberFromButton(e.target.value)}
+          value="5"
+        >
+          5
+        </Button>
+        <Button
+          variant="ligth"
+          onClick={(e) => setNumberFromButton(e.target.value)}
+          value="6"
+        >
+          6
+        </Button>
+      </div>
+      <div>
+        <Button
+          variant="ligth"
+          onClick={(e) => setNumberFromButton(e.target.value)}
+          value="1"
+        >
+          1
+        </Button>
+        <Button
+          variant="ligth"
+          onClick={(e) => setNumberFromButton(e.target.value)}
+          value="2"
+        >
+          2
+        </Button>
+        <Button
+          variant="ligth"
+          onClick={(e) => setNumberFromButton(e.target.value)}
+          value="3"
+        >
+          3
+        </Button>
+      </div>
+      <div>
+        <Button
+          variant="ligth"
+          onClick={(e) => setNumberFromButton(e.target.value)}
+          value="0"
+        >
+          0
+        </Button>
+        {/* clear all */}
+        <Button variant="ligth" onClick={() => clearAll()} value="">
+          AC
+        </Button>
         {/* "=" btn */}
-        <button
+        <Button
+          variant="danger"
           onClick={(e) => {
-            getCalc();
+            getCalc(operation);
           }}
           value="="
         >
           =
-        </button>
-      </div>
-      <div>
-        <button onClick={(e) => setNumberFromButton(e.target.value)} value="7">
-          7
-        </button>
-        <button onClick={(e) => setNumberFromButton(e.target.value)} value="8">
-          {" "}
-          8
-        </button>
-        <button onClick={(e) => setNumberFromButton(e.target.value)} value="9">
-          {" "}
-          9
-        </button>
-      </div>
-      <div>
-        <button onClick={(e) => setNumberFromButton(e.target.value)} value="4">
-          4
-        </button>
-        <button onClick={(e) => setNumberFromButton(e.target.value)} value="5">
-          5
-        </button>
-        <button onClick={(e) => setNumberFromButton(e.target.value)} value="6">
-          6
-        </button>
-      </div>
-      <div>
-        <button onClick={(e) => setNumberFromButton(e.target.value)} value="1">
-          1
-        </button>
-        <button onClick={(e) => setNumberFromButton(e.target.value)} value="2">
-          2
-        </button>
-        <button onClick={(e) => setNumberFromButton(e.target.value)} value="3">
-          3
-        </button>
+        </Button>
       </div>
     </div>
   );
