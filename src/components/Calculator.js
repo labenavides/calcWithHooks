@@ -12,14 +12,23 @@ function Calculator(props) {
     setOperation("");
     setPrevValue();
   };
+  const setAfterOperation = () => {
+    setNumber(0);
+    setOperation("");
+  };
   const setNumberFromButton = (e) => {
-    const numberFromButton = isNaN(number) ? "" : number;
-    setNumber(numberFromButton + e);
+    if (number === parseInt(initialValue)) {
+      setNumber(e);
+    } else {
+      const numberFromButton = isNaN(number) ? "" : number;
+      setNumber(numberFromButton + e);
+    }
   };
 
   const setOperationType = (type) => {
     if (!prevValue) {
-      setPrevValue(number);
+      setPrevValue(parseInt(number) + "");
+      setNumber(0);
     }
 
     setOperation(type);
@@ -30,19 +39,19 @@ function Calculator(props) {
     switch (operation) {
       case "+":
         setPrevValue(parseInt(prevValue) + parseInt(number));
-        setNumber(0);
+        setAfterOperation();
         break;
       case "-":
         setPrevValue(parseInt(prevValue) - parseInt(number));
-        setNumber(0);
+        setAfterOperation();
         break;
       case "*":
         setPrevValue(parseInt(prevValue) * parseInt(number));
-        setNumber(0);
+        setAfterOperation();
         break;
       case "/":
         setPrevValue(parseInt(prevValue) / parseInt(number));
-        setNumber(0);
+        setAfterOperation();
         break;
       default:
         break;
@@ -55,6 +64,8 @@ function Calculator(props) {
         {prevValue}
         {""}
         {operation}
+      </div>
+      <div className="display-result">
         {""}
         {parseInt(number) + ""}
       </div>
