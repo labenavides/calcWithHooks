@@ -3,8 +3,8 @@ import Button from "react-bootstrap/Button";
 
 function Calculator(props) {
   const { initialValue } = props;
-  const [number, setNumber] = useState(parseInt(initialValue));
-  const [prevValue, setPrevValue] = useState();
+  const [number, setNumber] = useState(0);
+  const [prevValue, setPrevValue] = useState(parseInt(initialValue));
   const [operation, setOperation] = useState("");
 
   const clearAll = () => {
@@ -21,6 +21,7 @@ function Calculator(props) {
     if (!prevValue) {
       setPrevValue(number);
     }
+
     setOperation(type);
     //  getCalc(type);
   };
@@ -29,19 +30,19 @@ function Calculator(props) {
     switch (operation) {
       case "+":
         setPrevValue(parseInt(prevValue) + parseInt(number));
-        setNumber();
+        setNumber(0);
         break;
       case "-":
         setPrevValue(parseInt(prevValue) - parseInt(number));
-        setNumber();
+        setNumber(0);
         break;
       case "*":
         setPrevValue(parseInt(prevValue) * parseInt(number));
-        setNumber();
+        setNumber(0);
         break;
       case "/":
         setPrevValue(parseInt(prevValue) / parseInt(number));
-        setNumber();
+        setNumber(0);
         break;
       default:
         break;
